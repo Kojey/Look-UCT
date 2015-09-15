@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kojey.lookuct.SlideActivity">
+
+    <ViewFlipper
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/viewFlipper" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageSlide"
+            android:src="@drawable/logo"/>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageSlide1"
+            android:src="@drawable/previous"/>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageSlide2"
+            android:src="@drawable/play"/>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageSlide3"
+            android:src="@drawable/next"/>
+    </ViewFlipper>
+
+    <ImageButton
+        android:layout_width="@dimen/button_square"
+        android:layout_height="@dimen/button_square"
+        android:id="@+id/but_next"
+        android:src="@drawable/next"
+        android:background="#00ab641a"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:onClick="nextSlide"
+        android:layout_toRightOf="@+id/but_play"
+        android:layout_toEndOf="@+id/but_play"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:layout_width="@dimen/button_square"
+        android:layout_height="@dimen/button_square"
+        android:id="@+id/but_play"
+        android:src="@drawable/play"
+        android:background="#00ab641a"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:onClick="playStop"
+        android:layout_alignTop="@+id/but_prev"
+        android:layout_centerHorizontal="true" />
+    <ImageButton
+        android:layout_width="@dimen/button_square"
+        android:layout_height="@dimen/button_square"
+        android:id="@+id/but_prev"
+        android:src="@drawable/previous"
+        android:background="#00ab641a"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:onClick="prevSlide"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/but_play"
+        android:layout_toStartOf="@+id/but_play" />
+
+</RelativeLayout>
