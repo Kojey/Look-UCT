@@ -1,7 +1,10 @@
 package com.example.kojey.lookuct;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +12,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class SlideActivity extends AppCompatActivity {
     String [] imageName = new String[2];
@@ -35,10 +45,37 @@ public class SlideActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide);
+        getSupportActionBar().hide();
         Initialize();
         slide = (ViewFlipper) findViewById(R.id.imageFlipper);
         setID();
+        ImageView imageView = (ImageView) findViewById(R.id.imageSlide);
+        TextView textView = (TextView) findViewById(R.id.imageTitle);
+        textView.setText(Images.getImageTitle(0));
+        BitmapDrawable bit = new BitmapDrawable(getResources(),Images.getImageSource(0).getAbsolutePath());
+        imageView.setImageDrawable(bit);
+    /*
+        slide.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_right));
+        slide.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out_left));
+
+        Animation.AnimationListener mAnimationListener = new Animation.AnimationListener(){
+            public void onAnimationStart(Animation animation) {
+                //animation started event
+            }
+
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            public void onAnimationEnd(Animation animation) {
+                if (slide.getDisplayedChild()==Images.MAX_IMAGE_NUMBER){
+                    slide.stopFlipping();
+                }
+            }
+        };
+       slide.getInAnimation().setAnimationListener(mAnimationListener);
+       */
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,17 +104,15 @@ public class SlideActivity extends AppCompatActivity {
     }
 
     public void playStop(View view) {
-        Utils.changeSlideshowState(); // Button is pressed so change the state of the slideshow
         ImageButton ib = (ImageButton) findViewById(R.id.but_play);
 
-        if(Utils.isSlideShowOn()){
-            index=0;    // reset index
-            ib.setImageResource(res[1]);
-            slide.setFlipInterval(500);
-            slide.startFlipping();
-        }else{
+        if(slide.isFlipping()){   // reset index
             ib.setImageResource(res[0]);
             slide.stopFlipping();
+        }else {
+            ib.setImageResource(res[1]);
+            slide.setFlipInterval(2000);
+            slide.startFlipping();
         }
 
     }
@@ -92,18 +127,21 @@ public class SlideActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imageSlide);
         TextView textView = (TextView) findViewById(R.id.imageTitle);
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.imageLayout);
-        for(int i=0; i<Images.MAX_IMAGE_NUMBER; i++){
-            imageID[i]=getResources().getIdentifier(Images.getImageSource(i),"drawable",getPackageName());
-            iV = new ImageView(this);
-            iV.setLayoutParams(imageView.getLayoutParams());
-            iV.setImageResource(imageID[i]);
+        File imageFile;
+        BitmapDrawable bit;
+        for(int i=1; i<Images.MAX_IMAGE_NUMBER; i++){
             tV = new TextView(this);
             tV.setGravity(textView.getGravity());
             tV.setLayoutParams(textView.getLayoutParams());
             tV.setText(Images.getImageTitle(i));
             tV.setTextAppearance(getApplicationContext(),R.style.imageTitleStyle);
-
             tV.setBackgroundResource(R.color.imageTitleBackground);
+
+            iV = new ImageView(this);
+            iV.setLayoutParams(imageView.getLayoutParams());
+            bit = new BitmapDrawable(getResources(),Images.getImageSource(i).getAbsolutePath());
+            iV.setImageDrawable(bit);
+
             rL = new RelativeLayout(this);
             rL.setLayoutParams(relativeLayout.getLayoutParams());
             rL.addView(tV);
@@ -113,4 +151,11 @@ public class SlideActivity extends AppCompatActivity {
 
     }
 
+
+    public void onAnimationEnd(Animation animation, ViewFlipper viewFlipper) {
+        //TODO animation stopped event
+        if (viewFlipper.getDisplayedChild()==Images.MAX_IMAGE_NUMBER){
+            viewFlipper.stopFlipping();
+        }
+    }
 }
