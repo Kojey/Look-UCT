@@ -1,6 +1,7 @@
 package com.example.kojey.lookuct;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 public class SlideActivity extends AppCompatActivity {
@@ -17,8 +20,10 @@ public class SlideActivity extends AppCompatActivity {
     int [] res = new int[2];
     int [] imageID = new int[Images.MAX_IMAGE_NUMBER];
     int index = 0;
-    int k =0;
     ViewFlipper slide;
+    ImageView iV;
+    TextView tV;
+    RelativeLayout rL;
 
     private void Initialize(){
 
@@ -31,7 +36,7 @@ public class SlideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide);
         Initialize();
-        slide = (ViewFlipper) findViewById(R.id.viewFlipper);
+        slide = (ViewFlipper) findViewById(R.id.imageFlipper);
         setID();
     }
 
@@ -84,15 +89,26 @@ public class SlideActivity extends AppCompatActivity {
     private void setID() {
         res[0] = getResources().getIdentifier(imageName[0],"drawable",getPackageName());
         res[1] = getResources().getIdentifier(imageName[1],"drawable",getPackageName());
-        ImageView j = (ImageView) findViewById(R.id.imageSlide);
-        //LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ImageView imageView = (ImageView) findViewById(R.id.imageSlide);
+        TextView textView = (TextView) findViewById(R.id.imageTitle);
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.imageLayout);
         for(int i=0; i<Images.MAX_IMAGE_NUMBER; i++){
             imageID[i]=getResources().getIdentifier(Images.getImageSource(i),"drawable",getPackageName());
-           // ViewGroup.LayoutParams par = findViewById(R.id.imageSlide).getLayoutParams();
-           /// slide.addView(j,par);
-           // slide.addView(inflater.inflate(R.layout.activity_slide,slide,false));
-           // slide.getCurrentView().setr
-           // slide.getChildAt(slide.getChildCount())
+            iV = new ImageView(this);
+            iV.setLayoutParams(imageView.getLayoutParams());
+            iV.setImageResource(imageID[i]);
+            tV = new TextView(this);
+            tV.setGravity(textView.getGravity());
+            tV.setLayoutParams(textView.getLayoutParams());
+            tV.setText(Images.getImageTitle(i));
+            tV.setTextAppearance(getApplicationContext(),R.style.imageTitleStyle);
+
+            tV.setBackgroundResource(R.color.imageTitleBackground);
+            rL = new RelativeLayout(this);
+            rL.setLayoutParams(relativeLayout.getLayoutParams());
+            rL.addView(tV);
+            rL.addView(iV);
+            slide.addView(rL);
         }
 
     }
