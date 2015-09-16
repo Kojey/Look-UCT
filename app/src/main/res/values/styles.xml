@@ -8,7 +8,7 @@
         <item name="android:textStyle">normal|italic</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@android:color/white</item>
-
+        <item name="android:background">#84010100</item>
     </style>
     <color name="imageTitleBackground">@android:color/darker_gray</color>
 </resources>

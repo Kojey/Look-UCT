@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Images {
     public static final int MAX_IMAGE_NUMBER = 15;
+    public static int childDisplayed = 0;
     private static ArrayList<File> imageSource = new ArrayList<>();
     private static String imageTitle [] = new String[MAX_IMAGE_NUMBER];
 

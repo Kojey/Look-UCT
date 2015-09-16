@@ -12,6 +12,11 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imageLayout">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageSlide"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -19,7 +24,7 @@
                 android:textStyle="normal|italic"
                 android:textSize="15sp"
                 android:textColor="@android:color/white"
-                android:background="@android:color/darker_gray"
+                android:background="#84010100"
                 android:layout_marginTop="43dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -27,11 +32,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:gravity="center" />
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageSlide"/>
-
 
         </RelativeLayout>
 
