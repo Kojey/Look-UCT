@@ -1,8 +1,8 @@
 package com.example.kojey.lookuct;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
 import java.io.File;
 
 public class SlideActivity extends AppCompatActivity {
@@ -112,7 +113,7 @@ public class SlideActivity extends AppCompatActivity {
             slide.stopFlipping();
         } else {
             ib.setImageResource(res[1]);
-            slide.setFlipInterval(100);
+            slide.setFlipInterval(3000);
             if(slide.getDisplayedChild() == slide.getChildCount()-1)
                 lastImage =true;
             slide.startFlipping();
@@ -145,7 +146,7 @@ public class SlideActivity extends AppCompatActivity {
             iV.setLayoutParams(imageView.getLayoutParams());
             bit = new BitmapDrawable(getResources(), Images.getImageSource(i).getAbsolutePath());
             iV.setImageDrawable(bit);
-
+            iV.setScaleType(imageView.getScaleType());
             rL = new RelativeLayout(this);
             rL.setLayoutParams(relativeLayout.getLayoutParams());
             rL.addView(iV);

@@ -5,79 +5,75 @@
     tools:context=".HomeActivity">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/backGround"
-        android:src="@drawable/front"
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:scaleType="centerCrop" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
+        android:textColor="#fa275ccd"
+        android:textSize="30sp"
+        android:textStyle="bold|normal|italic" />
 
     <ImageButton
+        android:id="@+id/start"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
-        android:id="@+id/start"
-        android:src="@drawable/start"
-        android:background="#00ab641a"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:onClick="btnSlide"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:background="#00ab641a"
+        android:onClick="btnSlide"
+        android:scaleType="fitCenter"
+        android:src="@drawable/start" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/header"
-        android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout"
-        android:layout_below="@+id/header"
         android:layout_above="@+id/start"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true">
 
         <TextView
+            android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="@string/info"
-            android:id="@+id/info"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="#ffffffff"
+            android:textColor="#fa275ccd"
             android:textSize="20sp"
             android:textStyle="bold|normal|italic" />
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/scrollView"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:gravity="center"
-            android:background="#61010101"
             android:layout_below="@+id/info"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#5284e3"
+            android:gravity="center"
             >
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info_app"
-                android:id="@+id/textView"
-                android:textStyle="normal|italic"
+                android:textColor="#ffffff"
                 android:textSize="15sp"
-                android:textColor="#ffffff" />
+                android:textStyle="normal|italic" />
         </ScrollView>
 
     </RelativeLayout>
